@@ -9,7 +9,7 @@ export class SocketService {
   private socket: SocketIOClient.Socket;
 
   constructor() {
-    this.socket = io('http://localhost:8080');
+    this.socket = io('http://localhost:3000');
   }
 
   // EMITTER
@@ -18,10 +18,12 @@ export class SocketService {
   }
 
   // HANDLER
-  onNewMessage() {
-    return Observable.create(observer => {
-      this.socket.on('newMessage', msg => {
-        observer.next(msg);
+  onNewCenterType() {
+    return Observable.create((observer) => {
+      this.socket.on('DBEvent', data => {
+        data
+          ? observer.next(data)
+          : observer.error('unable to reach server');
       });
     });
   }

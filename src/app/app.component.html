@@ -1,14 +1,22 @@
-
+Insert
+<br>
 <label>
-  Insert
-  <input type="text" [(ngModel)]="newUser">
+  Center Type
+  <input type="text" [(ngModel)]="centerType.type" [value]="centerType.type">
 </label>
-
-<button (click)="insertUser()">Añadir</button>
-
+<br>
+<label>
+  Temporary
+  <input type="checkbox" [(ngModel)]="centerType.temporary" [value]="centerType.temporary">
+</label>
+<br>
+<button (click)="insertCenterType()">Añadir</button>
+<br>
 <ul>
-  <li *ngFor="let user of users; let i = index">
-    {{ user }} <button (click)="deleteUser(i)">Eliminar</button>
+  <li (click)="centerType = centerTypes[i]" *ngFor="let center of centerTypes; let i = index">
+    {{ center.type }}
+    <button *ngIf="centerType ===  centerTypes[i]" (click)="updateCenterType(i)">Editar</button>
+    <button (click)="deleteCenterType(i)">Eliminar</button>
   </li>
 </ul>
 
